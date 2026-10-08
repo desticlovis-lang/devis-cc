@@ -3,13 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>System Diagnostic</title>
+
+<title>Diagnostic système</title>
+
 <style>
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 body {
     background: #020303;
     color: #d7ffe1;
@@ -17,22 +20,21 @@ body {
     height: 100vh;
     overflow: hidden;
 }
-/* EFFET DE SCAN */
+
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
-    background:
-        repeating-linear-gradient(
-            0deg,
-            rgba(0,255,100,0.025),
-            rgba(0,255,100,0.025) 1px,
-            transparent 1px,
-            transparent 4px
-        );
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0,255,100,0.025),
+        rgba(0,255,100,0.025) 1px,
+        transparent 1px,
+        transparent 4px
+    );
 }
-/* CONTAINER */
+
 .container {
     min-height: 100vh;
     display: flex;
@@ -40,11 +42,12 @@ body::before {
     justify-content: center;
     padding: 25px;
 }
+
 .panel {
     width: 100%;
     max-width: 850px;
 }
-/* HEADER */
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -53,15 +56,18 @@ body::before {
     padding-bottom: 18px;
     margin-bottom: 35px;
 }
+
 .logo {
     color: #00ff66;
     font-size: 15px;
     letter-spacing: 3px;
 }
+
 .status {
     color: #777;
     font-size: 11px;
 }
+
 .dot {
     display: inline-block;
     width: 7px;
@@ -71,19 +77,21 @@ body::before {
     margin-right: 7px;
     box-shadow: 0 0 10px #00ff66;
 }
-/* TERMINAL */
+
 .terminal {
     min-height: 180px;
 }
+
 .line {
     color: #8fa895;
     font-size: 13px;
     margin-bottom: 13px;
 }
+
 .line span {
     color: #00ff66;
 }
-/* WARNING */
+
 .warning {
     color: #ff4b4b;
     font-size: 13px;
@@ -91,15 +99,17 @@ body::before {
     margin-bottom: 30px;
     animation: blink 1s infinite;
 }
+
 @keyframes blink {
     50% {
         opacity: .45;
     }
 }
-/* PROGRESS */
+
 .progress-area {
     margin-top: 30px;
 }
+
 .progress-header {
     display: flex;
     justify-content: space-between;
@@ -107,6 +117,7 @@ body::before {
     font-size: 12px;
     margin-bottom: 10px;
 }
+
 .progress-box {
     height: 20px;
     width: 100%;
@@ -114,6 +125,7 @@ body::before {
     padding: 3px;
     background: #050806;
 }
+
 .progress {
     height: 100%;
     width: 0%;
@@ -125,13 +137,14 @@ body::before {
     box-shadow: 0 0 15px rgba(0,255,100,.6);
     transition: width .1s linear;
 }
+
 .percent {
     text-align: right;
     margin-top: 10px;
     color: #00ff66;
     font-size: 14px;
 }
-/* DETAILS */
+
 .details {
     display: flex;
     justify-content: space-between;
@@ -139,38 +152,45 @@ body::before {
     color: #53685a;
     font-size: 11px;
 }
-/* RESULT */
+
 .result {
     display: none;
     text-align: center;
 }
+
 .success-icon {
     width: 70px;
     height: 70px;
     border: 1px solid #00ff66;
     border-radius: 50%;
     margin: 0 auto 30px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     color: #00ff66;
     font-size: 30px;
+
     box-shadow:
         0 0 25px rgba(0,255,100,.25),
         inset 0 0 20px rgba(0,255,100,.1);
 }
+
 .result h1 {
     color: #00ff66;
     font-size: 24px;
     letter-spacing: 4px;
     margin-bottom: 35px;
 }
+
 .stats {
     border-top: 1px solid #12351c;
     border-bottom: 1px solid #12351c;
     padding: 25px 0;
     margin-bottom: 30px;
 }
+
 .stat {
     display: flex;
     justify-content: space-between;
@@ -178,18 +198,21 @@ body::before {
     margin: 12px auto;
     font-size: 12px;
 }
+
 .label {
     color: #65776a;
 }
+
 .value {
     color: #d7ffe1;
 }
+
 .complete {
     color: #00ff66;
     font-size: 11px;
     letter-spacing: 2px;
 }
-/* CURSEUR */
+
 .cursor {
     display: inline-block;
     width: 7px;
@@ -199,26 +222,28 @@ body::before {
     vertical-align: middle;
     animation: blink .7s infinite;
 }
-/* MOBILE */
+
 @media(max-width: 600px) {
     .container {
         padding: 20px;
     }
-    .header {
-        margin-bottom: 25px;
-    }
+
     .logo {
         font-size: 12px;
     }
+
     .warning {
         font-size: 11px;
     }
+
     .line {
         font-size: 11px;
     }
+
     .details {
         font-size: 9px;
     }
+
     .result h1 {
         font-size: 18px;
         letter-spacing: 2px;
@@ -226,154 +251,184 @@ body::before {
 }
 </style>
 </head>
+
 <body>
+
 <div class="container">
 <div class="panel">
-<!-- ÉCRAN DE CHARGEMENT -->
+
 <div id="loading">
+
     <div class="header">
+
         <div class="logo">
-            SYSTEM // DIAGNOSTIC
+            DIAGNOSTIC // SYSTÈME
         </div>
+
         <div class="status">
             <span class="dot"></span>
-            ACTIVE
+            ACTIF
         </div>
+
     </div>
+
     <div class="terminal">
+
         <div class="warning">
-            ⚠ UNUSUAL SYSTEM ACTIVITY DETECTED
+            ⚠ ACTIVITÉ SYSTÈME INHABITUELLE DÉTECTÉE
         </div>
+
         <div class="line">
             <span>[OK]</span>
-            Initializing secure environment...
+            Initialisation du système...
         </div>
+
         <div class="line">
             <span>[OK]</span>
-            Establishing encrypted connection...
+            Établissement d'une connexion sécurisée...
         </div>
+
         <div class="line">
             <span>[OK]</span>
-            Scanning available data...
+            Analyse des données disponibles...
         </div>
+
         <div class="line">
             <span>[!]</span>
-            Preparing data transfer...
+            Préparation du transfert des données...
         </div>
+
     </div>
+
     <div class="progress-area">
+
         <div class="progress-header">
-            <span>DATA TRANSFER</span>
+
+            <span>TRANSFERT DES DONNÉES</span>
+
             <span id="speed">
-                0.00 MB/s
+                0,00 Mo/s
             </span>
+
         </div>
+
         <div class="progress-box">
+
             <div
                 class="progress"
                 id="progress">
             </div>
+
         </div>
+
         <div class="percent">
-            <span id="percent">
-                0
-            </span>%
+
+            <span id="percent">0</span>%
+
             <span class="cursor"></span>
+
         </div>
+
     </div>
+
     <div class="details">
-        <span>
-            SESSION: 8F3A-91C2
-        </span>
-        <span>
-            ENCRYPTED
-        </span>
-        <span>
-            SECURE CHANNEL
-        </span>
+
+        <span>SESSION : 8F3A-91C2</span>
+        <span>CHIFFRÉ</span>
+        <span>CANAL SÉCURISÉ</span>
+
     </div>
+
 </div>
-<!-- ÉCRAN FINAL -->
+
+
 <div id="result" class="result">
+
     <div class="success-icon">
         ✓
     </div>
+
     <h1>
-        DATA TRANSFERRED
+        DONNÉES TRANSFÉRÉES
     </h1>
+
     <div class="stats">
+
         <div class="stat">
-            <span class="label">
-                Files processed
-            </span>
-            <span class="value">
-                1,284
-            </span>
+            <span class="label">Fichiers analysés</span>
+            <span class="value">1 284</span>
         </div>
+
         <div class="stat">
-            <span class="label">
-                Data transferred
-            </span>
-            <span class="value">
-                8.42 GB
-            </span>
+            <span class="label">Données transférées</span>
+            <span class="value">8,42 Go</span>
         </div>
+
         <div class="stat">
-            <span class="label">
-                Transfer status
-            </span>
-            <span class="value">
-                COMPLETE
-            </span>
+            <span class="label">État du transfert</span>
+            <span class="value">TERMINÉ</span>
         </div>
+
         <div class="stat">
-            <span class="label">
-                Connection
-            </span>
-            <span class="value">
-                SECURED
-            </span>
+            <span class="label">Connexion</span>
+            <span class="value">SÉCURISÉE</span>
         </div>
+
     </div>
+
     <div class="complete">
-        ✓ OPERATION COMPLETED SUCCESSFULLY
+        ✓ OPÉRATION TERMINÉE AVEC SUCCÈS
     </div>
+
+</div>
+
 </div>
 </div>
-</div>
+
+
 <script>
+
 const progress = document.getElementById("progress");
 const percent = document.getElementById("percent");
 const speed = document.getElementById("speed");
+
 const loading = document.getElementById("loading");
 const result = document.getElementById("result");
+
 let value = 0;
-/*
-    10 secondes
-    100 étapes
-    100 ms par étape
-*/
+
+/* 10 secondes */
+
 const timer = setInterval(() => {
+
     value++;
+
     progress.style.width = value + "%";
     percent.textContent = value;
-    /*
-        Fausse vitesse qui change
-        uniquement pour l'effet visuel.
-    */
+
     const currentSpeed =
         (2.5 + Math.random() * 5.5).toFixed(2);
+
     speed.textContent =
-        currentSpeed + " MB/s";
+        currentSpeed.replace(".", ",") + " Mo/s";
+
     if (value >= 100) {
+
         clearInterval(timer);
-        speed.textContent = "COMPLETE";
+
+        speed.textContent = "TERMINÉ";
+
         setTimeout(() => {
+
             loading.style.display = "none";
             result.style.display = "block";
+
         }, 800);
     }
+
 }, 100);
+
 </script>
+
 </body>
 </html>
